@@ -5,7 +5,7 @@ var urlsToCache = [
     '/images/favicon.png',
     '/stylesheets/style.css',
     '/serviceworker.js',
-    '/javascripts/main.js',
+    // '/javascripts/main.js',
 ];
 
 // インストール処理

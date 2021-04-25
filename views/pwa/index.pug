@@ -2,10 +2,14 @@ extend ../layout
 
 block head
     link(rel="manifest" href="/manifest.json")
+    script(src="https://unpkg.com/dexie@3.0.2/dist/dexie.min.js")
     script(src="/javascripts/main.js")
 
 block content
     #main hello PWA
+        a#select(href="#") select
+        br
+        #result
 
     script.
         if ('serviceWorker' in navigator) {
