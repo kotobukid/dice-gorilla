@@ -3,7 +3,7 @@ import {CSSProperties, MouseEventHandler} from "react";
 
 declare type SVGStyleRecord = Record<string, CSSProperties>
 
-const SvgGrid: React.FC<{ cx: number, cy: number, fill: string }> = props => {
+const SvgGrid: React.FC<{ cx: number, cy: number, fill: string, setX(x: number): void }> = props => {
     const [cx, setCx] = React.useState(props.cx)
     const [cy, setCy] = React.useState(props.cy)
     const r: number = 30
@@ -18,8 +18,9 @@ const SvgGrid: React.FC<{ cx: number, cy: number, fill: string }> = props => {
     }
 
     const mouse_dragging: MouseEventHandler = (ev: React.MouseEvent) => {
+        console.log(setCx)
         if (dragging) {
-            setCx(cx + ev.movementX)
+            props.setX(cx + ev.movementX)
             setCy(cy + ev.movementY)
         }
     }

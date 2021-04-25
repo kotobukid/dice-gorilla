@@ -22,15 +22,23 @@ window.onload = () => {
     //     lv: 2
     // }
 
-    const cx = 100
     const cy = 100
+
+    const useCx = (d_value: number) => {
+        const [num, setNum] = React.useState(d_value)
+        const cx = (x: number) => {
+            setNum(x)
+        }
+        return [num, cx] as const
+    }
+    const [cx, setX] = useCx(100)
 
     const MainApp = () => {
         return (
             <div>
                 <Profile {...profile_data}/>
-                <SvgGrid cx={cx} cy={cy} fill='red'/>
-                <SvgGrid cx={cx} cy={cy} fill='blue'/>
+                <SvgGrid cx={cx} cy={cy} fill='red' setX={(x: number) => {setX(x)}}/>
+                <SvgGrid cx={cx} cy={cy} fill='blue' setX={(x: number) => {setX(x)}}/>
             </div>
         )
     }

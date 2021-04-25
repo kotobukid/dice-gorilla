@@ -32177,8 +32177,9 @@ var SvgGrid = function (props) {
         setDragging(false);
     };
     var mouse_dragging = function (ev) {
+        console.log(setCx);
         if (dragging) {
-            setCx(cx + ev.movementX);
+            props.setX(cx + ev.movementX);
             setCy(cy + ev.movementY);
         }
     };
@@ -32312,13 +32313,20 @@ window.onload = function () {
     //     exp: 5000,
     //     lv: 2
     // }
-    var cx = 100;
     var cy = 100;
+    var useCx = function (d_value) {
+        var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(d_value), num = _a[0], setNum = _a[1];
+        var cx = function (x) {
+            setNum(x);
+        };
+        return [num, cx];
+    };
+    var _a = useCx(100), cx = _a[0], setX = _a[1];
     var MainApp = function () {
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_profile__WEBPACK_IMPORTED_MODULE_2__.default, __assign({}, profile_data)),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'red' }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'blue' })));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'red', setX: function (x) { setX(x); } }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'blue', setX: function (x) { setX(x); } })));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $main);
 };
