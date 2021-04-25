@@ -1,0 +1,11 @@
+{
+  "production": {
+    "privkey": "/path/to/privkey.pem",
+    "fullchain": "/path/to/fullchain.pem"
+  },
+  "develop": {
+    "privkey": "/path/to/privkey.pem",
+    "fullchain": "/path/to/fullchain.pem"
+  }
+}
+
