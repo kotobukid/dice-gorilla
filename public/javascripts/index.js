@@ -32168,7 +32168,7 @@ __webpack_require__.r(__webpack_exports__);
 var SvgGrid = function (props) {
     var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(props.cx), cx = _a[0], setCx = _a[1];
     var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState(props.cy), cy = _b[0], setCy = _b[1];
-    var r = 50;
+    var r = 30;
     var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), dragging = _c[0], setDragging = _c[1];
     var setDragOn = function (ev) {
         setDragging(true);
@@ -32183,14 +32183,15 @@ var SvgGrid = function (props) {
         }
     };
     var style = {
+        svg: { marginRight: '10px' },
         no_touch: { pointerEvents: 'none', fill: 'white' }
     };
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", { width: "1000", height: "600" },
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", { width: "500", height: "300", style: style.svg },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 1200, height: 800, fill: "grey" }),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("circle", { cx: cx, cy: cy, r: r, onMouseDown: setDragOn }),
         dragging ?
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 1200, height: 800, fill: "blue", opacity: 0.5, onMouseMove: mouse_dragging, onMouseUp: setDragOff }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 1200, height: 800, fill: props.fill, opacity: 0.5, onMouseMove: mouse_dragging, onMouseUp: setDragOff, onMouseLeave: setDragOff }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("text", { style: style.no_touch, x: 100, y: 100 }, "dragging"))
             : react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", null)));
 };
@@ -32316,7 +32317,8 @@ window.onload = function () {
     var MainApp = function () {
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_profile__WEBPACK_IMPORTED_MODULE_2__.default, __assign({}, profile_data)),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy })));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'red' }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'blue' })));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $main);
 };

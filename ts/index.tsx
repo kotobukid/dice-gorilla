@@ -22,14 +22,15 @@ window.onload = () => {
     //     lv: 2
     // }
 
-    let cx = 100
-    let cy = 100
+    const cx = 100
+    const cy = 100
 
     const MainApp = () => {
         return (
             <div>
                 <Profile {...profile_data}/>
-                <SvgGrid cx={cx} cy={cy}></SvgGrid>
+                <SvgGrid cx={cx} cy={cy} fill='red'/>
+                <SvgGrid cx={cx} cy={cy} fill='blue'/>
             </div>
         )
     }
