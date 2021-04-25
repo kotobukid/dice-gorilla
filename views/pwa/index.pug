@@ -1,17 +1,14 @@
 extend ../layout
 
 block head
-    link(rel="manifest" href="/manifest.json")
-    script(src="https://unpkg.com/dexie@3.0.2/dist/dexie.min.js")
-    script(src="/javascripts/main.js")
+    //link(rel="manifest" href="/manifest.json")
+    //script(src="https://unpkg.com/dexie@3.0.2/dist/dexie.min.js")
+    script(src="/javascripts/index.js")
 
 block content
-    #main hello PWA
-        a#select(href="#") select
-        br
-        #result
+    #main
 
-    script.
+    //- script.
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/serviceworker.js').then(function (registration) {
                 console.log('ServiceWorker registration successful with scope: ', registration.scope);
