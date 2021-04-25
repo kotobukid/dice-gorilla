@@ -1,4 +1,5 @@
 import * as React from 'react'
+import axios, {AxiosResponse} from 'axios'
 
 const Profile: React.FC<any> = (props) => {
     const [name, setName] = React.useState(props.name)
@@ -7,6 +8,11 @@ const Profile: React.FC<any> = (props) => {
         event.preventDefault()
         console.log({
             name
+        })
+        axios.post('/data/mock_save.json', {name}).then((data: AxiosResponse<{success: boolean, message: string}>) => {
+            console.log(data.data.success)
+            alert(data.data.message)
+            setName(data.data.message);
         })
     }
 

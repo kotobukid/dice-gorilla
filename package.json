@@ -7,8 +7,10 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "axios": "^0.21.1",
     "cookie-parser": "~1.4.4",
     "css-loader": "^5.2.4",
     "debug": "~2.6.9",
