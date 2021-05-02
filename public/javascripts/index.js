@@ -32166,10 +32166,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var SvgGrid = function (props) {
-    var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(props.cx), cx = _a[0], setCx = _a[1];
-    var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState(props.cy), cy = _b[0], setCy = _b[1];
     var r = 30;
-    var _c = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), dragging = _c[0], setDragging = _c[1];
+    var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), dragging = _a[0], setDragging = _a[1];
     var setDragOn = function (ev) {
         setDragging(true);
     };
@@ -32177,22 +32175,21 @@ var SvgGrid = function (props) {
         setDragging(false);
     };
     var mouse_dragging = function (ev) {
-        console.log(setCx);
         if (dragging) {
-            props.setX(cx + ev.movementX);
-            setCy(cy + ev.movementY);
+            props.setX(props.cx + ev.movementX);
+            props.setY(props.cy + ev.movementY);
         }
     };
     var style = {
         svg: { marginRight: '10px' },
         no_touch: { pointerEvents: 'none', fill: 'white' }
     };
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", { width: "500", height: "300", style: style.svg },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 1200, height: 800, fill: "grey" }),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("circle", { cx: cx, cy: cy, r: r, onMouseDown: setDragOn }),
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", { width: "300", height: "300", style: style.svg },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 300, height: 300, fill: "grey" }),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("circle", { cx: props.cx, cy: props.cy, r: r, onMouseDown: setDragOn }),
         dragging ?
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 1200, height: 800, fill: props.fill, opacity: 0.5, onMouseMove: mouse_dragging, onMouseUp: setDragOff, onMouseLeave: setDragOff }),
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("rect", { x: "0", y: "0", width: 300, height: 300, fill: props.fill, opacity: 0.5, onMouseMove: mouse_dragging, onMouseUp: setDragOff, onMouseLeave: setDragOff }),
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("text", { style: style.no_touch, x: 100, y: 100 }, "dragging"))
             : react__WEBPACK_IMPORTED_MODULE_0__.createElement("g", null)));
 };
@@ -32313,20 +32310,13 @@ window.onload = function () {
     //     exp: 5000,
     //     lv: 2
     // }
-    var cy = 100;
-    var useCx = function (d_value) {
-        var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(d_value), num = _a[0], setNum = _a[1];
-        var cx = function (x) {
-            setNum(x);
-        };
-        return [num, cx];
-    };
-    var _a = useCx(100), cx = _a[0], setX = _a[1];
     var MainApp = function () {
+        var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(100), x = _a[0], setX = _a[1];
+        var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState(100), y = _b[0], setY = _b[1];
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_profile__WEBPACK_IMPORTED_MODULE_2__.default, __assign({}, profile_data)),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'red', setX: function (x) { setX(x); } }),
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: cx, cy: cy, fill: 'blue', setX: function (x) { setX(x); } })));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: x, cy: y, fill: 'red', setX: setX, setY: setY }),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_svg_grid__WEBPACK_IMPORTED_MODULE_3__.default, { cx: x, cy: y, fill: 'blue', setX: setX, setY: setY })));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $main);
 };

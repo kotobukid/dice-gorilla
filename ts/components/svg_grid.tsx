@@ -3,9 +3,7 @@ import {CSSProperties, MouseEventHandler} from "react";
 
 declare type SVGStyleRecord = Record<string, CSSProperties>
 
-const SvgGrid: React.FC<{ cx: number, cy: number, fill: string, setX(x: number): void }> = props => {
-    const [cx, setCx] = React.useState(props.cx)
-    const [cy, setCy] = React.useState(props.cy)
+const SvgGrid: React.FC<{ cx: number, cy: number, fill: string, setX(x: number): void, setY(y: number): void }> = props => {
     const r: number = 30
     const [dragging, setDragging] = React.useState(false)
 
@@ -18,10 +16,9 @@ const SvgGrid: React.FC<{ cx: number, cy: number, fill: string, setX(x: number):
     }
 
     const mouse_dragging: MouseEventHandler = (ev: React.MouseEvent) => {
-        console.log(setCx)
         if (dragging) {
-            props.setX(cx + ev.movementX)
-            setCy(cy + ev.movementY)
+            props.setX(props.cx + ev.movementX)
+            props.setY(props.cy + ev.movementY)
         }
     }
 
@@ -31,12 +28,12 @@ const SvgGrid: React.FC<{ cx: number, cy: number, fill: string, setX(x: number):
     }
 
     return (
-        <svg width="500" height="300" style={style.svg}>
-            <rect x="0" y="0" width={1200} height={800} fill="grey"/>
-            <circle cx={cx} cy={cy} r={r} onMouseDown={setDragOn}/>
+        <svg width="300" height="300" style={style.svg}>
+            <rect x="0" y="0" width={300} height={300} fill="grey"/>
+            <circle cx={props.cx} cy={props.cy} r={r} onMouseDown={setDragOn}/>
             {dragging ?
                 <g>
-                    <rect x="0" y="0" width={1200} height={800} fill={props.fill} opacity={0.5}
+                    <rect x="0" y="0" width={300} height={300} fill={props.fill} opacity={0.5}
                           onMouseMove={mouse_dragging}
                           onMouseUp={setDragOff}
                           onMouseLeave={setDragOff}
