@@ -102,4 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+
 /.idea/
+/config/ssl.json
+/app.js
+/bin/*.js
