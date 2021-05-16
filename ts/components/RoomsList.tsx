@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 declare type RoomsListProps = {
-  rooms: string[]
+  rooms: {id: number, name: string}[]
 }
 
 const RoomsList: React.FC<RoomsListProps> = (props) => {
@@ -15,7 +15,7 @@ const RoomsList: React.FC<RoomsListProps> = (props) => {
       <ul>
         {
           props.rooms.map(room =>
-            <li>{room}</li>
+            <li key={room.id}>{room.name}</li>
           )
         }
       </ul>

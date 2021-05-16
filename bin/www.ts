@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import {ErrnoException} from './types'
+import {Socket as _Socket} from "net";
 
 /**
  * Module dependencies.
@@ -8,6 +9,7 @@ import {ErrnoException} from './types'
 const app = require('../app');
 const debug = require('debug')('ex1:server');
 const http = require('http');
+const {Server} = require("socket.io");
 
 /**
  * Get port from environment and store in Express.
@@ -22,6 +24,40 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
+const io = new Server(server);
+
+declare type Socket = _Socket & {
+  id: string,
+  handshake: {
+    query: {
+      room: string
+    }
+  }
+}
+
+io.on('connection', (socket: Socket & { id: string }) => {
+  console.log(socket.handshake.query.room)
+
+  socket.on('login', () => {
+    console.log('user logged in')
+  })
+
+  socket.on('logoff', () => {
+    console.log('user logged off')
+  })
+
+  socket.emit('rooms list', [
+    {id: 1, name: 'room#1'},
+    {id: 2, name: 'room#2'},
+    {id: 3, name: 'room#3'},
+    {id: 4, name: 'room#4'},
+    {id: 5, name: 'room#5'},
+    {id: 6, name: 'room#6'},
+    {id: 7, name: 'room#7'},
+  ])
+
+})
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -35,19 +71,19 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val: string) {
-    const port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
-    if (isNaN(port)) {
-        // named pipe
-        return val;
-    }
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
 
-    if (port >= 0) {
-        // port number
-        return port;
-    }
+  if (port >= 0) {
+    // port number
+    return port;
+  }
 
-    return false;
+  return false;
 }
 
 /**
@@ -55,27 +91,27 @@ function normalizePort(val: string) {
  */
 
 function onError(error: ErrnoException) {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
 
-    const bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+  const bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 }
 
 /**
@@ -83,10 +119,10 @@ function onError(error: ErrnoException) {
  */
 
 function onListening() {
-    const addr: string | { port: string } = server.address();
-    const bind: string = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
-    debug('Listening on ' + bind);
-    console.log(`start listening on port ${port}`);
+  const addr: string | { port: string } = server.address();
+  const bind: string = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+  console.log(`start listening on port ${port}`);
 }

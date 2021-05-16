@@ -2,7 +2,7 @@ import * as React from 'react';
 
 declare type NavBarProps = {
   isAuthenticated: boolean,
-  setIsAuthenticated: (value: boolean) => void
+  doLogin: (value: boolean) => void
 }
 
 const NavBar: React.FC<NavBarProps> = (props) => {
@@ -19,11 +19,11 @@ const NavBar: React.FC<NavBarProps> = (props) => {
       {
         props.isAuthenticated ?
           <button className="simple" onClick={() => {
-            props.setIsAuthenticated(false)
+            props.doLogin(false)
           }}>Log Off</button>
           :
           <button className="simple" onClick={() => {
-            props.setIsAuthenticated(true)
+            props.doLogin(true)
           }}>Log In</button>
       }
     </div>
