@@ -37031,8 +37031,8 @@ window.onload = function () {
             isAuthenticated ?
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms })
                 :
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { onClick: function () { return doLogin(true); } },
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button" }, "\u30ED\u30B0\u30A4\u30F3"),
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button", onClick: function () { return doLogin(true); } }, "\u30ED\u30B0\u30A4\u30F3"),
                         "\u3057\u3066\u3044\u307E\u305B\u3093")));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $root);

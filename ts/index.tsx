@@ -4,6 +4,7 @@ import {NavBar} from "./components/NavBar"
 import {RoomsList} from "./components/RoomsList"
 import io, {Socket} from "socket.io-client"
 import "../less/index.less"
+import {Room} from "../types";
 
 window.onload = () => {
   const $root = document.querySelector('#root')
@@ -12,10 +13,9 @@ window.onload = () => {
 
   const MainApp = () => {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false)
-    const [rooms, setRooms] = React.useState([] as {id: number, name: string}[])
+    const [rooms, setRooms] = React.useState([] as Room[])
 
-
-    socket.on('rooms list', (rooms: {id: number, name: string}[]) => {
+    socket.on('rooms list', (rooms: Room[]) => {
       setRooms(rooms)
     })
 
@@ -43,8 +43,8 @@ window.onload = () => {
           isAuthenticated ?
             <RoomsList rooms={rooms}/>
             :
-            <div onClick={() => doLogin(true)}>
-              <span className="button">ログイン</span>していません
+            <div>
+              <span className="button" onClick={() => doLogin(true)}>ログイン</span>していません
             </div>
         }
       </div>

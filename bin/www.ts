@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import {ErrnoException} from './types'
 import {Socket as _Socket} from "net";
+import {fetch_all_rooms} from "./rooms";
+import {MaybeError, Room} from "../types";
 
 /**
  * Module dependencies.
@@ -46,16 +48,9 @@ io.on('connection', (socket: Socket & { id: string }) => {
     io.to(socket.id).emit('you logged out')
   })
 
-  socket.emit('rooms list', [
-    {id: 1, name: 'room#1'},
-    {id: 2, name: 'room#2'},
-    {id: 3, name: 'room#3'},
-    {id: 4, name: 'room#4'},
-    {id: 5, name: 'room#5'},
-    {id: 6, name: 'room#6'},
-    {id: 7, name: 'room#7'},
-  ])
-
+  fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
+    socket.emit('rooms list', rooms)
+  })
 })
 
 /**

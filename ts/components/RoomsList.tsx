@@ -1,7 +1,8 @@
 import * as React from 'react'
+import {Room} from "../../types";
 
 declare type RoomsListProps = {
-  rooms: {id: number, name: string}[]
+  rooms: Room[]
 }
 
 const RoomsList: React.FC<RoomsListProps> = (props) => {

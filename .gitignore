@@ -107,4 +107,10 @@ dist
 /.idea/
 /config/ssl.json
 /app.js
+/types.js
 /bin/*.js
+
+
+*.pyc
+/db.sqlite3
+/venv
