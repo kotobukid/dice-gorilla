@@ -39,11 +39,11 @@ io.on('connection', (socket: Socket & { id: string }) => {
   console.log(socket.handshake.query.room)
 
   socket.on('login', () => {
-    console.log('user logged in')
+    io.to(socket.id).emit('you logged in')
   })
 
-  socket.on('logoff', () => {
-    console.log('user logged off')
+  socket.on('logout', () => {
+    io.to(socket.id).emit('you logged out')
   })
 
   socket.emit('rooms list', [

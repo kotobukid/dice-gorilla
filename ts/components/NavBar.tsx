@@ -20,7 +20,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
         props.isAuthenticated ?
           <button className="simple" onClick={() => {
             props.doLogin(false)
-          }}>Log Off</button>
+          }}>Log Out</button>
           :
           <button className="simple" onClick={() => {
             props.doLogin(true)

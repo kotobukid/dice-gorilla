@@ -36796,7 +36796,7 @@ var NavBar = function (props) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "pull_right" }, props.isAuthenticated ?
             react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "simple", onClick: function () {
                     props.doLogin(false);
-                } }, "Log Off")
+                } }, "Log Out")
             :
                 react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "simple", onClick: function () {
                         props.doLogin(true);
@@ -37011,14 +37011,19 @@ window.onload = function () {
         socket.on('rooms list', function (rooms) {
             setRooms(rooms);
         });
+        socket.on('you logged in', function () {
+            // check account
+            setIsAuthenticated(true);
+        });
+        socket.on('you logged out', function () {
+            setIsAuthenticated(false);
+        });
         var doLogin = function (login) {
             if (login) {
                 socket.emit('login');
-                setIsAuthenticated(true);
             }
             else {
-                socket.emit('logoff');
-                setIsAuthenticated(false);
+                socket.emit('logout');
             }
         };
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,

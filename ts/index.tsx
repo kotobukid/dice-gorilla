@@ -19,13 +19,20 @@ window.onload = () => {
       setRooms(rooms)
     })
 
+    socket.on('you logged in', () => {
+      // check account
+      setIsAuthenticated(true)
+    })
+
+    socket.on('you logged out', () => {
+      setIsAuthenticated(false)
+    })
+
     const doLogin = (login: boolean) => {
       if (login) {
         socket.emit('login')
-        setIsAuthenticated(true)
       } else {
-        socket.emit('logoff')
-        setIsAuthenticated(false)
+        socket.emit('logout')
       }
     }
 
