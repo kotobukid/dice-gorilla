@@ -114,3 +114,4 @@ dist
 *.pyc
 /db.sqlite3
 /venv
+/djadmin/djadmin/secret.py
