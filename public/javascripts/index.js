@@ -30262,38 +30262,63 @@ module.exports = function (list, options) {
 
 /***/ }),
 
-/***/ "./ts/components/Profile.tsx":
-/*!***********************************!*\
-  !*** ./ts/components/Profile.tsx ***!
-  \***********************************/
+/***/ "./ts/components/NavBar.tsx":
+/*!**********************************!*\
+  !*** ./ts/components/NavBar.tsx ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "NavBar": () => (/* binding */ NavBar)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-var Profile = function (props) {
-    var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(props.name), name = _a[0], setName = _a[1];
-    var log = function (event) {
-        event.preventDefault();
-        console.log({
-            name: name
-        });
+var NavBar = function (props) {
+    var style = {
+        padding: '10px',
+        margin: 0,
+        backgroundColor: 'black',
     };
-    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { id: "profile" },
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", { href: "#", onClick: log }, "Print"),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null,
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null,
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", null, "\u30AD\u30E3\u30E9\u30AF\u30BF\u30FC\u540D"),
-                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null,
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", { type: "text", value: name, onChange: function (e) {
-                                setName(e.target.value);
-                            } })))))));
+    return react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { id: "navbar", style: style },
+        "navbar",
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "pull_right" }, props.isAuthenticated ?
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "simple", onClick: function () {
+                    props.setIsAuthenticated(false);
+                } }, "Log Off")
+            :
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { className: "simple", onClick: function () {
+                        props.setIsAuthenticated(true);
+                    } }, "Log In")));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Profile);
+
+
+
+/***/ }),
+
+/***/ "./ts/components/RoomsList.tsx":
+/*!*************************************!*\
+  !*** ./ts/components/RoomsList.tsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RoomsList": () => (/* binding */ RoomsList)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var RoomsList = function (props) {
+    var style = {
+        padding: '10px'
+    };
+    return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "roomsList", style: style },
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "\u90E8\u5C4B\u4E00\u89A7"),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, props.rooms.map(function (room) {
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, room);
+        }))));
+};
+
 
 
 /***/ })
@@ -30375,41 +30400,34 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _components_Profile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Profile */ "./ts/components/Profile.tsx");
-/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../less/index.less */ "./less/index.less");
-var __assign = (undefined && undefined.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+/* harmony import */ var _components_NavBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/NavBar */ "./ts/components/NavBar.tsx");
+/* harmony import */ var _components_RoomsList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/RoomsList */ "./ts/components/RoomsList.tsx");
+/* harmony import */ var _less_index_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../less/index.less */ "./less/index.less");
+
 
 
 
 
 window.onload = function () {
     var $root = document.querySelector('#root');
-    var profile_data = {
-        name: 'からあげクン',
-    };
-    // const base_status: any = {
-    //     skill: 12,
-    //     body: 5,
-    //     mental: 9,
-    // }
-    //
-    // const levels_data: any = {
-    //     exp: 5000,
-    //     lv: 2
-    // }
     var MainApp = function () {
+        var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isAuthenticated = _a[0], setIsAuthenticated = _a[1];
+        var rooms = [
+            'room#1',
+            'room#2',
+            'room#3',
+            'room#4',
+            'room#5',
+            'room#6'
+        ];
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_Profile__WEBPACK_IMPORTED_MODULE_2__.default, __assign({}, profile_data))));
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_NavBar__WEBPACK_IMPORTED_MODULE_2__.NavBar, { isAuthenticated: isAuthenticated, setIsAuthenticated: setIsAuthenticated }),
+            isAuthenticated ?
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms })
+                :
+                    react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { onClick: function () { return setIsAuthenticated(true); } },
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button" }, "\u30ED\u30B0\u30A4\u30F3"),
+                        "\u3057\u3066\u3044\u307E\u305B\u3093")));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $root);
 };
