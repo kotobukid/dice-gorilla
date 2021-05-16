@@ -37,31 +37,55 @@ declare type Socket = _Socket & {
   }
 }
 
-io.on('connection', (socket: Socket & { id: string }) => {
-  console.log(socket.handshake.query.room)
+const LOBBY = '0'
 
-  socket.on('login', () => {
-    io.to(socket.id).emit('you logged in')
-  })
+const players: Record<string, number> = {}
 
-  socket.on('logout', () => {
-    io.to(socket.id).emit('you logged out')
-  })
+io.on('connection', (socket: Socket & { id: string, join(room: string): void }) => {
+  const room: string = socket.handshake.query.room;
+  socket.join(room)
+  players[`room:${room}`] = (players[`room:${room}`] || 0) + 1
 
-  socket.on('create room', (name: string) => {
-    create_room(name, (err: MaybeError) => {
-      if (err) {
-        throw err
-      }
-      fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
-        socket.emit('rooms list', rooms)
+  if (room === LOBBY) {
+    socket.on('login', () => {
+      io.to(socket.id).emit('you logged in')
+    })
+
+    socket.on('logout', () => {
+      io.to(socket.id).emit('you logged out')
+    })
+
+    socket.on('create room', (name: string) => {
+      create_room(name, (err: MaybeError) => {
+        if (err) {
+          throw err
+        }
+        fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
+          io.to(LOBBY).emit('rooms list', rooms)
+        })
       })
     })
+
+    fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
+      socket.emit('rooms list', rooms)
+    })
+
+  } else {
+    io.to(room).emit('players in room', players[`room:${room}`])
+    io.to(LOBBY).emit('players in all rooms', players)
+  }
+
+  socket.on('disconnect', () => {
+    players[`room:${room}`] = players[`room:${room}`] - 1
+    if (players[`room:${room}`] < 1) {
+      delete players[`room:${room}`]
+    }
+    io.to(LOBBY).emit('players in all rooms', players)
+    console.log('disconnect');
+    console.log(players)
   })
 
-  fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
-    socket.emit('rooms list', rooms)
-  })
+  console.log(players)
 })
 
 /**

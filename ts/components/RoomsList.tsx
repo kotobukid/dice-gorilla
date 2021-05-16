@@ -3,7 +3,8 @@ import {Room} from "../../types"
 
 declare type RoomsListProps = {
   rooms: Room[],
-  createRoom(e: React.MouseEvent): void
+  createRoom(e: React.MouseEvent): void,
+  join(room_id: number): void
 }
 
 const RoomsList: React.FC<RoomsListProps> = (props) => {
@@ -24,7 +25,7 @@ const RoomsList: React.FC<RoomsListProps> = (props) => {
       <ul style={ulStyle}>
         {
           props.rooms.map(room =>
-            <li className="link" key={room.id} title={room.description}>#{room.id} {room.name}</li>
+            <li className="link" key={room.id} title={room.description} onClick={e => {props.join(room.id)}}>#{room.id} {room.name}</li>
           )
         }
       </ul>

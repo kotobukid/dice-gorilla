@@ -36833,7 +36833,7 @@ var RoomsList = function (props) {
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "\u90E8\u5C4B\u4E00\u89A7"),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { onClick: props.createRoom }, "\u90E8\u5C4B\u4F5C\u6210"),
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", { style: ulStyle }, props.rooms.map(function (room) {
-            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", { className: "link", key: room.id, title: room.description },
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", { className: "link", key: room.id, title: room.description, onClick: function (e) { props.join(room.id); } },
                 "#",
                 room.id,
                 " ",
@@ -37014,10 +37014,14 @@ __webpack_require__.r(__webpack_exports__);
 
 window.onload = function () {
     var $root = document.querySelector('#root');
-    var socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_4__.default)(document.location.origin + "?room=1");
+    var socket = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_4__.default)(document.location.origin + "?room=0");
+    var socket_room;
     var MainApp = function () {
         var _a = react__WEBPACK_IMPORTED_MODULE_0__.useState(false), isAuthenticated = _a[0], setIsAuthenticated = _a[1];
         var _b = react__WEBPACK_IMPORTED_MODULE_0__.useState([]), rooms = _b[0], setRooms = _b[1];
+        socket.on('players in all rooms', function (players) {
+            console.log(players);
+        });
         socket.on('rooms list', function (rooms) {
             setRooms(rooms);
         });
@@ -37042,10 +37046,16 @@ window.onload = function () {
                 socket.emit('create room', name);
             }
         };
+        var join = function (room_id) {
+            socket_room = (0,socket_io_client__WEBPACK_IMPORTED_MODULE_4__.default)(document.location.origin + "?room=" + room_id);
+            socket_room.on('players in room', function (msg) {
+                console.log(msg + " players in your room");
+            });
+        };
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_NavBar__WEBPACK_IMPORTED_MODULE_2__.NavBar, { isAuthenticated: isAuthenticated, doLogin: doLogin }),
             isAuthenticated ?
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms, createRoom: createRoom })
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms, createRoom: createRoom, join: join })
                 :
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
                         react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button link", onClick: function () { return doLogin(true); } }, "\u30ED\u30B0\u30A4\u30F3"),
