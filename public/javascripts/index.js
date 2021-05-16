@@ -370,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "* {\n  line-height: 1rem;\n  font-size: 1rem;\n}\nul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  width: auto;\n}\nli {\n  display: list-item;\n  width: auto;\n}\nli:hover {\n  background-color: lightblue;\n}\n.link {\n  color: #2f2ffc;\n  cursor: pointer;\n}\n.link:hover {\n  text-decoration: underline;\n}\n.link:active {\n  position: relative;\n  top: 1px;\n}\n", "",{"version":3,"sources":["webpack://./less/index.less"],"names":[],"mappings":"AAAA;EACI,iBAAA;EACA,eAAA;AACJ;AAEA;EACI,UAAA;EACA,SAAA;EACA,gBAAA;EACA,WAAA;AAAJ;AAGA;EACI,kBAAA;EACA,WAAA;AADJ;AAEI;EACI,2BAAA;AAAR;AAIA;EACI,cAAA;EACA,eAAA;AAFJ;AAGI;EACI,0BAAA;AADR;AAGI;EACI,kBAAA;EACA,QAAA;AADR","sourcesContent":["* {\n    line-height: 1rem;\n    font-size: 1rem;\n}\n\nul {\n    padding: 0;\n    margin: 0;\n    list-style: none;\n    width: auto;\n}\n\nli {\n    display: list-item;\n    width: auto;\n    &:hover {\n        background-color: lightblue;\n    }\n}\n\n.link {\n    color: #2f2ffc;\n    cursor: pointer;\n    &:hover {\n        text-decoration: underline;\n    }\n    &:active {\n        position: relative;\n        top: 1px;\n    }\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -36824,10 +36824,20 @@ var RoomsList = function (props) {
     var style = {
         padding: '10px'
     };
+    var ulStyle = {
+        width: '200px',
+        border: '1px solid grey',
+        padding: '10px'
+    };
     return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", { className: "roomsList", style: style },
         react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "\u90E8\u5C4B\u4E00\u89A7"),
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, props.rooms.map(function (room) {
-            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", { key: room.id }, room.name);
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", { onClick: props.createRoom }, "\u90E8\u5C4B\u4F5C\u6210"),
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", { style: ulStyle }, props.rooms.map(function (room) {
+            return react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", { className: "link", key: room.id, title: room.description },
+                "#",
+                room.id,
+                " ",
+                room.name);
         }))));
 };
 
@@ -37026,13 +37036,19 @@ window.onload = function () {
                 socket.emit('logout');
             }
         };
+        var createRoom = function (e) {
+            var name = (window.prompt('Enter room name', '') || '').trim();
+            if (name) {
+                socket.emit('create room', name);
+            }
+        };
         return (react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_NavBar__WEBPACK_IMPORTED_MODULE_2__.NavBar, { isAuthenticated: isAuthenticated, doLogin: doLogin }),
             isAuthenticated ?
-                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms })
+                react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_RoomsList__WEBPACK_IMPORTED_MODULE_3__.RoomsList, { rooms: rooms, createRoom: createRoom })
                 :
                     react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null,
-                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button", onClick: function () { return doLogin(true); } }, "\u30ED\u30B0\u30A4\u30F3"),
+                        react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", { className: "button link", onClick: function () { return doLogin(true); } }, "\u30ED\u30B0\u30A4\u30F3"),
                         "\u3057\u3066\u3044\u307E\u305B\u3093")));
     };
     (0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)(react__WEBPACK_IMPORTED_MODULE_0__.createElement(MainApp, null), $root);

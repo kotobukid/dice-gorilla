@@ -4,7 +4,7 @@ import {NavBar} from "./components/NavBar"
 import {RoomsList} from "./components/RoomsList"
 import io, {Socket} from "socket.io-client"
 import "../less/index.less"
-import {Room} from "../types";
+import {Room} from "../types"
 
 window.onload = () => {
   const $root = document.querySelector('#root')
@@ -36,15 +36,22 @@ window.onload = () => {
       }
     }
 
+    const createRoom = (e: React.MouseEvent): void => {
+      const name: string = (window.prompt('Enter room name', '') || '').trim()
+      if (name) {
+        socket.emit('create room', name)
+      }
+    }
+
     return (
       <div>
         <NavBar isAuthenticated={isAuthenticated} doLogin={doLogin}/>
         {
           isAuthenticated ?
-            <RoomsList rooms={rooms}/>
+            <RoomsList rooms={rooms} createRoom={createRoom}/>
             :
             <div>
-              <span className="button" onClick={() => doLogin(true)}>ログイン</span>していません
+              <span className="button link" onClick={() => doLogin(true)}>ログイン</span>していません
             </div>
         }
       </div>
