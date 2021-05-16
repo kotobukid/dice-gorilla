@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <radialGradient gradientUnits="userSpaceOnUse" cx="559.854" cy="354" r="0.794" id="gradient-3" gradientTransform="matrix(1.300959, 0, 0, 1.300959, -167.935883, -106.539989)">
+      <stop offset="0" style="stop-color: rgba(255, 232, 115, 1)"/>
+      <stop offset="1" style="stop-color: rgba(255, 215, 13, 1)"/>
+    </radialGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="512.461" y1="420.166" x2="512.461" y2="431.834" id="gradient-0" gradientTransform="matrix(1.293845, 0.135867, -0.087885, 0.836918, -111.890898, 2.554372)">
+      <stop offset="0" style="stop-color: rgba(255, 232, 115, 1)"/>
+      <stop offset="1" style="stop-color: rgb(202, 173, 25);"/>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="8.825" y1="-1.653" x2="8.825" y2="20.549" id="gradient-1">
+      <stop offset="0" style="stop-color: rgba(41, 249, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(24, 147, 0, 1)"/>
+    </linearGradient>
+  </defs>
+  <rect x="-2.808" y="-1.653" width="23.266" height="22.202" style="fill: url(#gradient-1);"/>
+  <path style="fill: url(#gradient-0);" transform="matrix(0.785871, 0.61839, -0.61839, 0.785871, -131.062044, -641.939739)" d="M 508.813 418.503 A 7.59 7.59 0 1 1 508.813 433.497 A 8.765 8.765 0 0 0 508.813 418.503 Z" bx:shape="crescent 510 426 7.59 198 0.7 1@ea73ffea"/>
+  <path style="fill: url(#gradient-3);" transform="matrix(-0.113547, -0.993533, 0.993533, -0.113547, -277.749888, 598.112867)" d="M 559.456 350.878 A 3.445 3.445 0 0 1 559.456 357.122 A 62.592 62.592 0 0 1 559.456 350.878 Z" bx:shape="crescent 558 354 3.445 130 0.7 1@3543c270"/>
+</svg>
