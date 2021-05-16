@@ -60,6 +60,7 @@ io.on('connection', (socket: Socket & { id: string, join(room: string): void }) 
         if (err) {
           throw err
         }
+        console.log(`new room is created: ${name}`)
         fetch_all_rooms((err: MaybeError, rooms: Room[]) => {
           io.to(LOBBY).emit('rooms list', rooms)
         })
